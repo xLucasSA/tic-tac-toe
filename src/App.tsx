@@ -1,6 +1,8 @@
+import Header from "./components/Header";
+import { Scoreboard, Buttons } from "./components/Menu"
 import Placeholder from "./components/Placeholder"
 import './styles/game.css'
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 
 type GameStates = {
   [key: string]: boolean;
@@ -37,7 +39,7 @@ function App() {
         const isWinner = playerPosition === playerPosition1 && playerPosition === playerPosition2 && playerPosition1 === playerPosition2
 
         if (isWinner) {
-          turn ? alert("O Wins!"): alert("X Wins!");
+          return turn ? alert("O Wins!"): alert("X Wins!");
         }
         //TODO remover verificação de dentro do loop e passar para fora a responsabilidade de retornar o vencendor
         //TODO inserir casos de empate também
@@ -51,9 +53,14 @@ function App() {
   }
 
   return (
-    <div className="game">
-      {board}
-    </div>
+    <>
+      <Header />
+      <Scoreboard pointsO={0} pointsX={0} turn={"X"}/>
+      <div className="game">
+        {board}
+      </div>
+      <Buttons />
+    </>
   )
 }
 

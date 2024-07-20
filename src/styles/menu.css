@@ -1,0 +1,16 @@
+.scoreboard {
+    display: flex;
+    gap: 24px;
+}
+
+.player-turn {
+    margin-bottom: 24px;
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
