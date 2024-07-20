@@ -3,7 +3,7 @@ import '../styles/menu.css'
 type Props = {
     pointsX: number;
     pointsO: number;
-    turn: string;
+    turn: boolean;
 }
 
 function Buttons() {
@@ -23,7 +23,7 @@ function Scoreboard({pointsX, pointsO, turn}: Props) {
                 <h4>Jogador O: {pointsO} pontos</h4>
             </div>
             <div className="player-turn">
-                Vez de {turn}
+                Vez de {turn ? "X" : "O"}
             </div>
         </>
     );

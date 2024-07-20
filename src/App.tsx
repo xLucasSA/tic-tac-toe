@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import { Scoreboard, Buttons } from "./components/Menu"
 import Placeholder from "./components/Placeholder"
 import './styles/game.css'
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 type GameStates = {
   [key: string]: boolean;
@@ -23,12 +23,17 @@ function App() {
   const board: ReactElement[] = []
   let [boardMapping, setBoardMapping]= useState<GameStates>({})
   let [turn, setTurn] = useState<boolean>(false)
+  let [gameEnd, setGameEnd] = useState<boolean>(false)
+  let [pointsX, setPointsX] = useState<number>(0)
+  let [pointsO, setPointsO] = useState<number>(0)
   
+  //Change player's turn
   function playerClicked(id: string) {
     setTurn(prev => turn = !prev)
     setBoardMapping(prev => boardMapping = {...prev, [id]: turn})
   }
 
+  //Verify whether there is a winner
   function isWin() {
     winingTable.forEach((victoryPosition) => {
       const playerPosition = boardMapping[victoryPosition[0]]
@@ -39,23 +44,47 @@ function App() {
         const isWinner = playerPosition === playerPosition1 && playerPosition === playerPosition2 && playerPosition1 === playerPosition2
 
         if (isWinner) {
-          return turn ? alert("O Wins!"): alert("X Wins!");
+          endMach()
         }
-        //TODO remover verificação de dentro do loop e passar para fora a responsabilidade de retornar o vencendor
-        //TODO inserir casos de empate também
-        //TODO criar um placar e botao para reinicar placar e o jogo
       }
     })
   }
+
+  //Verify whether is a draw
+  function isDraw() {
+    let isDraw: boolean = true 
+    for (let i = 0; i < 9; i++) {
+      if (boardMapping[i] === undefined){
+        isDraw = false
+      }
+    }
+
+    if (isDraw) {
+      alert("DRAW")
+    }
+  }
+
+  //End the match
+  function endMach() {
+    //TODO modificar o placar de acordo com o vencedor
+    //TODO alterar o endGame para que bloqueie os outros quadrados
+    //TODO implementar lógica para reiniciar o a partida e o game
+  }
+
+  useEffect(() => {
+    isWin()
+    isDraw()
+  }, [turn])
     
+  //Create game board
   for (let index = 0; index < 9; index++) {
-    board.push(<Placeholder turn={turn} playerClicked={playerClicked} id={index.toString()} isWin={isWin}/>)    
+    board.push(<Placeholder gameEnd={gameEnd} turn={turn} playerClicked={playerClicked} id={index.toString()}/>)    
   }
 
   return (
     <>
       <Header />
-      <Scoreboard pointsO={0} pointsX={0} turn={"X"}/>
+      <Scoreboard pointsO={pointsO} pointsX={pointsX} turn={turn}/>
       <div className="game">
         {board}
       </div>
