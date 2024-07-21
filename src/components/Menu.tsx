@@ -1,21 +1,27 @@
 import '../styles/menu.css'
 
-type Props = {
+type ScoreboardProps = {
     pointsX: number;
     pointsO: number;
     turn: boolean;
 }
 
-function Buttons() {
+type ButtonsProps = {
+    resetMatch: Function;
+    resetGame: Function;
+}
+
+function Buttons({resetGame, resetMatch}:ButtonsProps) {
+
     return (
         <div className="buttons">
-            <button type="button">Reinciar Jogo</button>
-            <button type="button">Reiniciar Placar</button>
+            <button type="button" onClick={() => resetMatch()}>Reinciar Jogo</button>
+            <button type="button" onClick={() => resetGame()}>Reiniciar Placar</button>
         </div>
     );
 }
 
-function Scoreboard({pointsX, pointsO, turn}: Props) {
+function Scoreboard({pointsX, pointsO, turn}: ScoreboardProps) {
     return (
         <>
             <div className="scoreboard">

@@ -26,6 +26,7 @@ function App() {
   let [gameEnd, setGameEnd] = useState<boolean>(false)
   let [pointsX, setPointsX] = useState<number>(0)
   let [pointsO, setPointsO] = useState<number>(0)
+  let [reset, setReset] = useState<boolean>(false)
   
   //Change player's turn
   function playerClicked(id: string) {
@@ -33,7 +34,7 @@ function App() {
     setBoardMapping(prev => boardMapping = {...prev, [id]: turn})
   }
 
-  //Verify whether there is a winner
+  //Check if there is a winner
   function isWin() {
     winingTable.forEach((victoryPosition) => {
       const playerPosition = boardMapping[victoryPosition[0]]
@@ -44,13 +45,13 @@ function App() {
         const isWinner = playerPosition === playerPosition1 && playerPosition === playerPosition2 && playerPosition1 === playerPosition2
 
         if (isWinner) {
-          endMach()
+          endMach(playerPosition)
         }
       }
     })
   }
 
-  //Verify whether is a draw
+  //Check if is a draw
   function isDraw() {
     let isDraw: boolean = true 
     for (let i = 0; i < 9; i++) {
@@ -60,14 +61,22 @@ function App() {
     }
 
     if (isDraw) {
-      alert("DRAW")
+      endMach()
     }
   }
 
-  //End the match
-  function endMach() {
-    //TODO modificar o placar de acordo com o vencedor
-    //TODO alterar o endGame para que bloqueie os outros quadrados
+  function endMach(player?:boolean) {
+    //O wins
+    if (player === true) {
+      setPointsO(prev => prev + 1)
+    }
+
+    //X wins
+    if (player === false) {
+      setPointsX(prev => prev + 1)
+    }
+
+    setGameEnd(true)
     //TODO implementar lógica para reiniciar o a partida e o game
   }
 
@@ -75,10 +84,31 @@ function App() {
     isWin()
     isDraw()
   }, [turn])
-    
+
+  function resetGame() {
+    resetMatch()
+    setPointsO(0)
+    setPointsX(0)
+  }
+
+  function resetMatch() {
+    setBoardMapping({})
+    setGameEnd(false)
+    setReset(true)
+  }
+
   //Create game board
   for (let index = 0; index < 9; index++) {
-    board.push(<Placeholder gameEnd={gameEnd} turn={turn} playerClicked={playerClicked} id={index.toString()}/>)    
+    board.push(
+    <Placeholder 
+      isReseted={reset}
+      setReset={setReset}
+      gameEnd={gameEnd} 
+      turn={turn} 
+      playerClicked={playerClicked} 
+      id={index.toString()}
+      />
+    )    
   }
 
   return (
@@ -88,7 +118,7 @@ function App() {
       <div className="game">
         {board}
       </div>
-      <Buttons />
+      <Buttons resetMatch={resetMatch} resetGame={resetGame}/>
     </>
   )
 }

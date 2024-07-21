@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/placeholder.css';
 import PlayerX from './PlayerX';
 import PlayerO from './PlayerO';
@@ -9,9 +9,11 @@ type Props = {
     playerClicked: Function;
     turn: boolean;
     gameEnd: boolean;
-  }
+    isReseted: boolean; 
+    setReset: Function;
+}
 
-function Placeholder({ id, playerClicked, turn, gameEnd}: Props) {
+function Placeholder({ id, playerClicked, turn, gameEnd, isReseted, setReset}: Props) {
     let [hasChange, setHasChange] = useState<boolean>(false)
     let [playerX, setPlayerX] = useState<boolean>(false)
     let [playerO, setPlayerO] = useState<boolean>(false)
@@ -27,6 +29,15 @@ function Placeholder({ id, playerClicked, turn, gameEnd}: Props) {
             changeTurn()
         }
     }
+
+    useEffect(() => {
+        if (isReseted) {
+            setPlayerO(false)
+            setPlayerX(false)
+            setHasChange(false)
+        }
+        setReset(false)
+    }, [isReseted])
 
     return (
         <div id={id} className="placeholder" onClick={() => playerMoviment()}>
