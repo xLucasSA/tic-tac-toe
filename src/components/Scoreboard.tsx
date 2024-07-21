@@ -1,24 +1,9 @@
-import '../styles/menu.css'
+import '../styles/scoreboard.css'
 
 type ScoreboardProps = {
     pointsX: number;
     pointsO: number;
     turn: boolean;
-}
-
-type ButtonsProps = {
-    resetMatch: Function;
-    resetGame: Function;
-}
-
-function Buttons({resetGame, resetMatch}:ButtonsProps) {
-
-    return (
-        <div className="buttons">
-            <button type="button" onClick={() => resetMatch()}>Reinciar Jogo</button>
-            <button type="button" onClick={() => resetGame()}>Reiniciar Placar</button>
-        </div>
-    );
 }
 
 function Scoreboard({pointsX, pointsO, turn}: ScoreboardProps) {
@@ -35,7 +20,4 @@ function Scoreboard({pointsX, pointsO, turn}: ScoreboardProps) {
     );
 }
 
-export {
-    Buttons,
-    Scoreboard
-}
+export default Scoreboard

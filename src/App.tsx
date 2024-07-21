@@ -1,5 +1,6 @@
 import Header from "./components/Header";
-import { Scoreboard, Buttons } from "./components/Menu"
+import Buttons from "./components/Buttons"
+import Scoreboard from "./components/Scoreboard";
 import Placeholder from "./components/Placeholder"
 import './styles/game.css'
 import { ReactElement, useEffect, useState } from "react";
