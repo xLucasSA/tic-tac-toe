@@ -1,8 +1,10 @@
 import Header from "./components/Header";
-import Buttons from "./components/Buttons"
 import Scoreboard from "./components/Scoreboard";
-import Placeholder from "./components/Placeholder"
-import './styles/game.css'
+import Placeholder from "./components/Placeholder";
+import Buttons from "./components/Buttons";
+import WinMessage from "./components/WinMessage";
+import './styles/game.css';
+
 import { ReactElement, useEffect, useState } from "react";
 
 type GameStates = {
@@ -28,6 +30,7 @@ function App() {
   let [pointsX, setPointsX] = useState<number>(0)
   let [pointsO, setPointsO] = useState<number>(0)
   let [reset, setReset] = useState<boolean>(false)
+  let [isWinner, setIsWinner] = useState<boolean>(false)
   
   //Change player's turn
   function playerClicked(id: string) {
@@ -70,11 +73,13 @@ function App() {
     //O wins
     if (player === true) {
       setPointsO(prev => prev + 1)
+      setIsWinner(true)
     }
 
     //X wins
     if (player === false) {
       setPointsX(prev => prev + 1)
+      setIsWinner(true)
     }
 
     setGameEnd(true)
@@ -96,6 +101,7 @@ function App() {
     setBoardMapping({})
     setGameEnd(false)
     setReset(true)
+    setIsWinner(false)
   }
 
   //Create game board
@@ -115,6 +121,7 @@ function App() {
   return (
     <>
       <Header />
+      {gameEnd && <WinMessage player={turn} isWinner={isWinner}/>}
       <Scoreboard pointsO={pointsO} pointsX={pointsX} turn={turn}/>
       <div className="game">
         {board}
