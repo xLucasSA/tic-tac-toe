@@ -83,7 +83,6 @@ function App() {
     }
 
     setGameEnd(true)
-    //TODO implementar lógica para reiniciar o a partida e o game
   }
 
   useEffect(() => {
