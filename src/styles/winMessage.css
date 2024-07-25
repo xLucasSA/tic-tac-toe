@@ -1,8 +1,27 @@
-.win-message {
+.message {
     width: 330px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px dashed white;
+}
+
+.message.win {
+    animation-name: winnig-animations;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+
+@keyframes winnig-animations {
+    0% {
+        color: #fff;
+        background-color: #242424;
+    }
+
+    50% {
+        color: #242424;
+        background-color: #fff;
+    }
 }

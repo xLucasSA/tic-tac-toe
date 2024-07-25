@@ -8,14 +8,14 @@ type Props = {
 function WinMessage({ player, isWinner }: Props) {
     if (isWinner) {
         return(
-            <div className="win-message">
+            <div className="message win">
                 O Jogador {player ? "O" : "X"} venceu a partida! 
             </div>
         );
     }
     
     return(
-        <div className="win-message">
+        <div className="message">
             Deu Velha! &#128565;
         </div>
        
