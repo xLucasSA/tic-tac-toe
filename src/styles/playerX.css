@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: placedX 0.3s;
 }
 
 .X > :nth-child(n) {
@@ -22,4 +23,13 @@
 .X > :last-child {
     bottom: 1.5px;
     rotate: -45deg;
+}
+
+@keyframes placedX {
+    from {
+        transform: translateZ(400px);
+    }
+    to {
+        transform: translateZ(0);
+    }
 }
