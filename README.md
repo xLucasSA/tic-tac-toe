@@ -1,4 +1,4 @@
-[English](#tic-tac-toe-in-react) / [Portugês](#jogo-da-velha-em-react)
+[English](#tic-tac-toe-in-react) / [Português](#jogo-da-velha-em-react)
 
 # Tic-Tac-Toe in React
 
