@@ -13,3 +13,22 @@
     grid-template-columns: repeat(3, 1fr);
     transform-style: preserve-3d;
 }
+
+.game.win {
+    animation: game-end 0.75s;
+}
+
+@keyframes game-end {
+    0% {
+        transform: rotateX(0) rotateY(0);
+    }
+
+    25% {
+        transform: rotateY(180deg) rotateX(270deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+
+}

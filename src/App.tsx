@@ -122,7 +122,7 @@ function App() {
       <Header />
       {gameEnd && <WinMessage player={turn} isWinner={isWinner}/>}
       <Scoreboard pointsO={pointsO} pointsX={pointsX} turn={turn}/>
-      <div className="game">
+      <div className={isWinner ? "game win" : "game"}>
         {board}
       </div>
       <Buttons resetMatch={resetMatch} resetGame={resetGame}/>
