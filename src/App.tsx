@@ -103,6 +103,21 @@ function App() {
     setIsWinner(false)
   }
 
+  //Modify classname of board when states change
+  function changeGameStyles(): string {
+    let styles = "game"
+    
+    if (isWinner) {
+      styles += " win"
+    }
+
+    if (reset) {
+      styles += " reset"
+    }
+    
+    return styles
+  }
+
   //Create game board
   for (let index = 0; index < 9; index++) {
     board.push(
@@ -122,7 +137,7 @@ function App() {
       <Header />
       {gameEnd && <WinMessage player={turn} isWinner={isWinner}/>}
       <Scoreboard pointsO={pointsO} pointsX={pointsX} turn={turn}/>
-      <div className={isWinner ? "game win" : "game"}>
+      <div className={changeGameStyles()}>
         {board}
       </div>
       <Buttons resetMatch={resetMatch} resetGame={resetGame}/>

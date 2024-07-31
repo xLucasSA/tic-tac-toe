@@ -12,10 +12,15 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .game.win {
     animation: game-end 0.75s;
+}
+
+.game.reset {
+    animation: reset 0.2s;
 }
 
 @keyframes game-end {
@@ -31,4 +36,30 @@
         transform: rotateX(360deg) rotateY(360deg);
     }
 
+}
+
+@keyframes reset {
+    0% {
+        transform: translateX(0);
+    }
+
+    15% {
+        transform: translateX(60px);
+    }
+
+    30% {
+        transform: translateX(-60px);
+    }
+
+    50% {
+        transform: translateX(30px);
+    }
+
+    75% {
+        transform: translateX(-15px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }

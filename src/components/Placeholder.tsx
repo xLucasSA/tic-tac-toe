@@ -36,7 +36,10 @@ function Placeholder({ id, playerClicked, turn, gameEnd, isReseted, setReset}: P
             setPlayerX(false)
             setHasChange(false)
         }
-        setReset(false)
+
+        setTimeout(() => {
+            setReset(false)
+        }, 200)
     }, [isReseted])
 
     return (
